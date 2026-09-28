@@ -564,6 +564,71 @@ h3 {
   }
 }
 
+/* 主催団体・賛助企業（トップ） */
+.org-inner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.org-logo {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 40px;
+  display: grid;
+  place-items: center;
+}
+
+.org-logo img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+}
+
+.org-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 0 0 16px;
+}
+
+.org-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.org-sub {
+  color: var(--muted);
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+}
+
+.sponsor-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.sponsor-strip .sponsor-logo {
+  margin: 0;
+  height: 88px;
+}
+
+.region-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+@media (max-width: 800px) {
+  .org-inner {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
 /* 地域を選ぶ */
 .region-grid {
   display: grid;

@@ -5,7 +5,7 @@ const NAV_ITEMS = [
   { href: "about.html", label: "職業人生ゲームとは" },
   { href: "sponsors.html", label: "各地の協賛企業" },
   { href: "organizer.html", label: "主催団体" },
-  { href: "support.html", label: "サポート企業" },
+  { href: "support.html", label: "賛助企業" },
   { href: "faq.html", label: "よくある質問" },
 ];
 

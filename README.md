@@ -8,7 +8,7 @@
 - `about.html` — 職業人生ゲームとは（想い・理念、遊び方、マスの説明）
 - `sponsors.html` — 各地の協賛企業（高槻・吹田をタブで切り替え。`sponsors.html#suita` で吹田を直接表示）
 - `organizer.html` — 主催団体（AporTar）
-- `support.html` — サポート企業（MTK）
+- `support.html` — 賛助企業（MTK）
 - `faq.html` — よくある質問
 - `contact.html` — お問い合わせ・協賛のご案内
 - `style.css` — 全ページ共通のスタイル

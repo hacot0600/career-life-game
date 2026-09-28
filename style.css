@@ -603,29 +603,31 @@ h3 {
   font-size: 0.9rem;
 }
 
-.sponsor-strip {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 16px;
+.org-reverse {
+  grid-template-columns: 1.3fr 1fr;
 }
 
-.sponsor-strip .sponsor-logo {
-  margin: 0;
-  height: 88px;
+.org-logo-alt {
+  background: var(--cream);
+  min-height: 200px;
 }
 
-.region-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 32px;
+.org-logo-placeholder {
+  font-size: 2.4rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #cdbba1;
 }
 
 @media (max-width: 800px) {
   .org-inner {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  /* スマホではロゴを先に出す */
+  .org-reverse .org-logo {
+    order: -1;
   }
 }
 

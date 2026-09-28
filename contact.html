@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ・協賛のご案内｜職業人生ゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main>
+    <div class="page-header">
+      <h1>お問い合わせ・協賛のご案内</h1>
+      <p>イベントへの参加や協賛について、お気軽にご連絡ください。</p>
+    </div>
+
+    <section class="section">
+      <div class="container prose">
+        <h2>協賛のご案内</h2>
+        <div class="card">
+          <p>協賛金</p>
+          <p class="price">1口 15,000円</p>
+          <ul class="benefit-list">
+            <li>職業カードの裏面に企業ロゴと紹介文を掲載します</li>
+            <li>子どもたちにわかりやすい言葉で、事業内容や魅力を伝えます</li>
+            <li>地元の親子に向けた認知度アップ・採用ブランディングの機会になります</li>
+            <li>このサイトの「各地の協賛企業」ページに掲載します</li>
+          </ul>
+        </div>
+
+        <h2>お問い合わせフォーム</h2>
+        <p><span class="placeholder-note">送信先は準備中です</span></p>
+        <form id="contact-form" class="card">
+          <div class="form-row">
+            <label for="kind">お問い合わせの種類<span class="req">必須</span></label>
+            <select id="kind" name="kind" required>
+              <option value="">選んでください</option>
+              <option>協賛について</option>
+              <option>イベント参加について</option>
+              <option>取材・その他</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="name">お名前<span class="req">必須</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="form-row">
+            <label for="company">会社名・団体名</label>
+            <input id="company" name="company" type="text" autocomplete="organization">
+          </div>
+          <div class="form-row">
+            <label for="email">メールアドレス<span class="req">必須</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div class="form-row">
+            <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button class="btn" type="submit">送信する</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <script src="script.js"></script>
+</body>
+</html>

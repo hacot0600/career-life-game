@@ -475,6 +475,95 @@ h3 {
   margin: 0 0 40px;
 }
 
+/* 職業人生ゲームとは（トップ） */
+.intro-inner {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.intro-title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin: 0 0 16px;
+}
+
+.intro-lead {
+  font-size: 1.15rem;
+  font-weight: bold;
+  margin: 0 0 12px;
+}
+
+.intro-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0 28px;
+}
+
+.intro-facts div {
+  background: var(--cream);
+  border-radius: 12px;
+  padding: 8px 16px;
+}
+
+.intro-facts dt {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.intro-facts dd {
+  margin: 0;
+  font-weight: bold;
+}
+
+.intro-squares {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.intro-squares li {
+  background: var(--cream);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.intro-squares .sq {
+  display: block;
+  width: 28px;
+  height: 28px;
+  margin: 4px auto 16px;
+  transform: rotate(45deg);
+}
+
+.intro-squares strong {
+  display: block;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.pc-only {
+  display: inline;
+}
+
+@media (max-width: 800px) {
+  .intro-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .pc-only {
+    display: none;
+  }
+}
+
 /* 地域を選ぶ */
 .region-grid {
   display: grid;

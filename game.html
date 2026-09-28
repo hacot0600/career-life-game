@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>あそんでみよう | 職業人生ゲーム</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>職業人生ゲーム</h1>
+    <p class="tagline">たくさんの しごとを しって、しょうらい なりたいことを かんがえよう！</p>
+  </header>
+
+  <main>
+    <!-- はじめる画面 -->
+    <section id="setup" class="card screen">
+      <h2>あそびかた</h2>
+      <ol class="rules">
+        <li>サイコロを ふって マスを すすもう！</li>
+        <li>しょくぎょうカードを あつめて、ミッションを クリアしたり、クイズに こたえたりして ポイントを あつめよう！</li>
+        <li>みんなが ゴールしたら おしまい。ポイントが いちばん おおい ひとの かち！</li>
+      </ol>
+      <ul class="legend">
+        <li><span class="chip sq-card">カード</span>しょくぎょうカードを 1まい</li>
+        <li><span class="chip sq-special">スペシャル</span>しょくぎょうカードを 2まい</li>
+        <li><span class="chip sq-mission">おしごと</span>カードと あえば 1pt</li>
+        <li><span class="chip sq-quiz">クイズ</span>せいかいで 1pt</li>
+      </ul>
+
+      <h2>だれが あそぶ？</h2>
+      <form id="setup-form">
+        <div id="player-inputs" class="player-inputs"></div>
+        <div class="setup-actions">
+          <button type="button" id="remove-player" class="btn btn-ghost">− へらす</button>
+          <button type="button" id="add-player" class="btn btn-ghost">＋ ふやす</button>
+        </div>
+        <button type="submit" class="btn btn-primary btn-big">ゲームを はじめる</button>
+      </form>
+    </section>
+
+    <!-- ゲーム画面 -->
+    <section id="game" class="screen" hidden>
+      <div class="turn-bar card">
+        <div>
+          <span id="turn-token" class="token-dot"></span>
+          <strong id="turn-name"></strong> の ばん
+        </div>
+        <div class="dice-area">
+          <div id="dice" class="dice" aria-live="polite">🎲</div>
+          <button id="roll-btn" class="btn btn-primary">サイコロを ふる</button>
+        </div>
+      </div>
+
+      <div id="board" class="board" aria-label="ゲームばん"></div>
+
+      <div id="scoreboard" class="scoreboard"></div>
+
+      <div class="card log-card">
+        <h3>できごと</h3>
+        <ul id="log" class="log"></ul>
+      </div>
+    </section>
+
+    <!-- けっか画面 -->
+    <section id="result" class="card screen" hidden>
+      <h2>けっか はっぴょう！</h2>
+      <ol id="ranking" class="ranking"></ol>
+      <p class="closing">きになる おしごとは あったかな？<br>おうちの ひとと「しょうらい どんな しごとを してみたい？」を はなしてみよう！</p>
+      <button id="again-btn" class="btn btn-primary btn-big">もういちど あそぶ</button>
+    </section>
+  </main>
+
+  <!-- カードやクイズを表示するダイアログ -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <p id="modal-kind" class="modal-kind"></p>
+      <h2 id="modal-title"></h2>
+      <div id="modal-body"></div>
+      <div id="modal-actions" class="modal-actions"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 職業人生ゲーム</p>
+  </footer>
+
+  <script src="game-data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

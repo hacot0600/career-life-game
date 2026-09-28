@@ -60,3 +60,13 @@ footer {
   color: var(--muted);
   font-size: 0.85rem;
 }
+
+.play-link {
+  display: inline-block;
+  background: var(--accent);
+  color: #0f172a;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+}

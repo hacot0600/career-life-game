@@ -352,35 +352,91 @@ h3 {
   }
 }
 
-/* トップだけ、ヘッダーを画像の上に透明で重ねる（スクロールすると白に戻る） */
+/* トップだけ、ヘッダーは右上の半透明の三本線のみ（PCでもスマホでも同じ） */
 .home .site-header {
   position: fixed;
+  top: 0;
   left: 0;
   right: 0;
   background: transparent;
-  border-bottom-color: transparent;
+  border-bottom: none;
   backdrop-filter: none;
-  transition: background 0.3s, border-color 0.3s;
+  pointer-events: none;
 }
 
-.home .site-header:not(.is-scrolled):not(:has(.global-nav.is-open)) .logo,
-.home .site-header:not(.is-scrolled) .global-nav:not(.is-open) a:not(.btn) {
-  color: var(--white);
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+.home .header-inner {
+  max-width: none;
+  justify-content: flex-end;
 }
 
-.home .site-header:not(.is-scrolled) .menu-toggle span {
+.home .logo {
+  display: none;
+}
+
+.home .menu-toggle {
+  display: block;
+  position: relative;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  padding: 14px;
+  margin-top: 16px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  pointer-events: auto;
+  transition: background 0.2s;
+}
+
+.home .menu-toggle:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.home .menu-toggle span {
   background: var(--white);
 }
 
-.home .site-header.is-scrolled,
-.home .site-header:has(.global-nav.is-open) {
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom-color: var(--line);
+/* 三本線を押すと、画面全体にメニューを出す */
+.home .global-nav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 80px 20px 40px;
+  background: rgba(43, 33, 24, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: none;
+  border: none;
+  pointer-events: auto;
 }
 
-.home .site-header:has(.global-nav.is-open) .menu-toggle span {
-  background: var(--text);
+.home .global-nav.is-open {
+  display: flex;
+}
+
+.home .global-nav ul {
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.home .global-nav a:not(.btn) {
+  color: var(--white);
+  font-size: 1.15rem;
+  padding: 10px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.home .global-nav a:not(.btn):hover {
+  border-bottom-color: var(--orange);
+}
+
+.home .btn-contact {
+  margin-top: 8px;
+  padding: 12px 32px;
 }
 
 /* マスの色（他ページで使用） */

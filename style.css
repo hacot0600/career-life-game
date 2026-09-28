@@ -244,15 +244,19 @@ h3 {
   }
 }
 
-/* ---------- メインビジュアル（トップ） ---------- */
+/* ---------- メインビジュアル（トップ） ----------
+   BOTANIST のように、画面いっぱいの画像に一言だけ載せる */
 .hero {
   position: relative;
-  min-height: 72vh;
+  height: 100vh;
+  height: 100svh;
+  min-height: 480px;
   display: grid;
   place-items: center;
   text-align: center;
   overflow: hidden;
   color: var(--white);
+  background: #3a2c1f;
 }
 
 .hero-slide {
@@ -266,76 +270,120 @@ h3 {
 
 .hero-slide.is-active {
   opacity: 1;
+  animation: hero-zoom 12s ease-out both;
 }
 
-/* 写真が届くまでの仮背景。写真を入れるときは style="background-image:url(...)" を付ける */
-.hero-slide:nth-child(1) {
-  background-color: #f59e0b;
-  background-image: radial-gradient(circle at 20% 30%, #fde68a 0 12%, transparent 13%),
-    radial-gradient(circle at 80% 70%, #fb923c 0 18%, transparent 19%);
-}
-.hero-slide:nth-child(2) {
-  background-color: #22a55a;
-  background-image: radial-gradient(circle at 75% 25%, #a7f3d0 0 14%, transparent 15%),
-    radial-gradient(circle at 15% 80%, #15803d 0 20%, transparent 21%);
-}
-.hero-slide:nth-child(3) {
-  background-color: #2f6fe4;
-  background-image: radial-gradient(circle at 30% 75%, #bfdbfe 0 13%, transparent 14%),
-    radial-gradient(circle at 85% 20%, #1d4ed8 0 18%, transparent 19%);
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .hero::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.25);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.2) 40%, rgba(0, 0, 0, 0.45) 100%);
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  padding: 60px 20px;
-}
-
-.hero-eyebrow {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--orange-deep);
-  font-weight: bold;
-  border-radius: 999px;
-  padding: 4px 16px;
-  margin-bottom: 16px;
-}
-
-.hero h1 {
-  font-size: clamp(2rem, 6vw, 3.6rem);
-  margin: 0 0 12px;
-  letter-spacing: 0.06em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  padding: 0 20px;
 }
 
 .hero-copy {
-  font-size: clamp(1rem, 2.4vw, 1.3rem);
+  font-size: clamp(2rem, 6.5vw, 4.4rem);
   font-weight: bold;
-  margin: 0 0 8px;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* 4色のマスを並べたシンボル */
-.squares {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 24px 0 0;
+.sp-only {
+  display: none;
 }
 
-.squares span {
-  width: 22px;
-  height: 22px;
-  transform: rotate(45deg);
-  border: 2px solid var(--white);
+@media (max-width: 600px) {
+  .sp-only {
+    display: inline;
+  }
 }
 
+.hero-scroll {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  color: var(--white);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  padding-bottom: 44px;
+}
+
+.hero-scroll::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1px;
+  height: 36px;
+  background: var(--white);
+  animation: scroll-line 2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* トップだけ、ヘッダーを画像の上に透明で重ねる（スクロールすると白に戻る） */
+.home .site-header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  background: transparent;
+  border-bottom-color: transparent;
+  backdrop-filter: none;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.home .site-header:not(.is-scrolled):not(:has(.global-nav.is-open)) .logo,
+.home .site-header:not(.is-scrolled) .global-nav:not(.is-open) a:not(.btn) {
+  color: var(--white);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.home .site-header:not(.is-scrolled) .menu-toggle span {
+  background: var(--white);
+}
+
+.home .site-header.is-scrolled,
+.home .site-header:has(.global-nav.is-open) {
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom-color: var(--line);
+}
+
+.home .site-header:has(.global-nav.is-open) .menu-toggle span {
+  background: var(--text);
+}
+
+/* マスの色（他ページで使用） */
 .sq-red {
   background: var(--red);
 }
@@ -855,7 +903,10 @@ h3 {
   html {
     scroll-behavior: auto;
   }
-  .hero-slide {
+  .hero-slide,
+  .hero-slide.is-active,
+  .hero-scroll::after {
     transition: none;
+    animation: none;
   }
 }

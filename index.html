@@ -7,27 +7,20 @@
   <meta name="description" content="サイコロをふって職業カードを集めよう。子どもたちが楽しみながら地元企業と仕事を知る、職業体験イベント「職業人生ゲーム」の公式サイトです。">
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="home">
   <header id="site-header" class="site-header"></header>
 
   <main>
-    <!-- メインビジュアル：写真が届いたら各 .hero-slide に style="background-image:url(images/xxx.jpg)" を付ける -->
+    <!-- メインビジュアル：画面いっぱいの画像に一言。写真を増やすときは .hero-slide を追加すると自動でスライドする -->
     <section class="hero">
-      <div class="hero-slide is-active"></div>
-      <div class="hero-slide"></div>
-      <div class="hero-slide"></div>
+      <div class="hero-slide is-active" style="background-image:url(images/hero-cards.jpg)"></div>
       <div class="hero-content">
-        <p class="hero-eyebrow">子ども向け職業体験イベント</p>
-        <h1>職業人生ゲーム</h1>
-        <p class="hero-copy">ゲームで地元企業を知る。</p>
-        <p>サイコロをふって職業カードを集めて、将来なりたいことを考えよう！</p>
-        <div class="squares" aria-hidden="true">
-          <span class="sq-red"></span><span class="sq-gold"></span><span class="sq-green"></span><span class="sq-blue"></span>
-        </div>
+        <h1 class="hero-copy">ゲームで、<br class="sp-only">地元企業を知る。</h1>
       </div>
+      <a class="hero-scroll" href="#regions">SCROLL</a>
     </section>
 
-    <section class="section">
+    <section class="section" id="regions">
       <div class="container">
         <h2 class="section-title">地域を選ぶ</h2>
         <p class="section-lead">各地で協力してくださっている企業を紹介しています。</p>

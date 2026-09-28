@@ -44,6 +44,15 @@ function renderHeader() {
       </nav>
     </div>`;
 
+  // トップでは画像の上に透明で重ねているので、画像を過ぎたら白い背景にする
+  if (document.body.classList.contains("home")) {
+    const hero = document.querySelector(".hero");
+    const update = () =>
+      el.classList.toggle("is-scrolled", window.scrollY > (hero ? hero.offsetHeight - el.offsetHeight : 0));
+    window.addEventListener("scroll", update, { passive: true });
+    update();
+  }
+
   const toggle = el.querySelector(".menu-toggle");
   const nav = el.querySelector(".global-nav");
   toggle.addEventListener("click", () => {

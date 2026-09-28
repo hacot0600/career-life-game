@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>各地の協賛企業｜職業人生ゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header id="site-header" class="site-header"></header>
+
+  <main>
+    <div class="page-header">
+      <h1>各地の協賛企業</h1>
+      <p>職業人生ゲームは、地元企業のみなさまのご協力で開催しています。</p>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="tabs" role="tablist" aria-label="地域">
+          <button role="tab" data-region-tab="takatsuki" aria-selected="true">高槻</button>
+          <button role="tab" data-region-tab="suita" aria-selected="false">吹田</button>
+        </div>
+
+        <!-- 企業が決まったら .sponsor-card をコピーして増やす。ロゴは <img src="images/sponsors/xxx.png" alt="企業名"> に置き換える -->
+        <div data-region-panel="takatsuki" role="tabpanel">
+          <p class="center" style="margin:0 0 24px"><span class="placeholder-note">企業情報は仮です</span></p>
+          <div class="sponsor-grid">
+            <div class="sponsor-card">
+              <div class="sponsor-logo">ロゴ</div>
+              <h3>企業名</h3>
+              <p>ひとこと紹介が入ります。</p>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-logo">ロゴ</div>
+              <h3>企業名</h3>
+              <p>ひとこと紹介が入ります。</p>
+            </div>
+            <div class="sponsor-card">
+              <div class="sponsor-logo">ロゴ</div>
+              <h3>企業名</h3>
+              <p>ひとこと紹介が入ります。</p>
+            </div>
+          </div>
+        </div>
+
+        <div data-region-panel="suita" role="tabpanel" hidden>
+          <p class="center" style="margin:0 0 24px"><span class="placeholder-note">吹田産業フェアに向けて協賛企業を募集中です</span></p>
+          <div class="sponsor-grid">
+            <div class="sponsor-card">
+              <div class="sponsor-logo">ロゴ</div>
+              <h3>企業名</h3>
+              <p>ひとこと紹介が入ります。</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="center"><a class="btn" href="contact.html">協賛のご案内を見る</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer" class="site-footer"></footer>
+  <script src="script.js"></script>
+</body>
+</html>

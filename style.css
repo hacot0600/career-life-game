@@ -301,7 +301,8 @@ h3 {
   letter-spacing: 0.12em;
   line-height: 1.5;
   margin: 0;
-  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
+  /* 白文字を写真の上でも読みやすくするための黒い影 */
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.8), 0 4px 24px rgba(0, 0, 0, 0.6);
 }
 
 .sp-only {

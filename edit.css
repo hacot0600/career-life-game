@@ -1,0 +1,140 @@
+/* 編集モード（edit.html）専用のスタイル。サイト本体の style.css とは分けている。 */
+
+:root {
+  --ed-bg: #1f2328;
+  --ed-fg: #ffffff;
+  --ed-muted: #c9d1d9;
+  --ed-accent: #f5a000;
+  --ed-accent-fg: #1f2328;
+  --ed-panel: #ffffff;
+  --ed-panel-fg: #1f2328;
+  --ed-line: #d0d7de;
+  --ed-error: #cf222e;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--ed-bg);
+  font-family: "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.ed-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 8px 16px;
+  background: var(--ed-bg);
+  color: var(--ed-fg);
+}
+
+.ed-title { font-size: 15px; white-space: nowrap; }
+.ed-spacer { flex: 1; }
+
+.ed-page select {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #57606a;
+  background: #2d333b;
+  color: var(--ed-fg);
+}
+
+.ed-count { font-size: 13px; color: var(--ed-muted); white-space: nowrap; }
+.ed-count.is-dirty { color: var(--ed-accent); font-weight: bold; }
+
+.ed-btn {
+  font: inherit;
+  font-size: 14px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ed-btn:disabled { opacity: 0.45; cursor: default; }
+.ed-btn-primary { background: var(--ed-accent); color: var(--ed-accent-fg); font-weight: bold; }
+.ed-btn-ghost { background: transparent; color: inherit; border-color: currentColor; }
+
+.ed-message {
+  margin: 0;
+  padding: 6px 16px;
+  font-size: 13px;
+  background: #fff8e1;
+  color: #5c4400;
+}
+.ed-message.is-ok { background: #dafbe1; color: #0f5323; }
+.ed-message.is-error { background: #ffebe9; color: #82071e; }
+
+.ed-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
+}
+
+.ed-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  border: 0;
+  border-radius: 12px;
+  padding: 24px;
+  background: var(--ed-panel);
+  color: var(--ed-panel-fg);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.ed-dialog::backdrop { background: rgba(0, 0, 0, 0.5); }
+.ed-dialog h2 { margin: 0 0 12px; font-size: 18px; }
+.ed-dialog ol { padding-left: 1.4em; }
+.ed-dialog a { color: #0969da; }
+
+.ed-field { display: block; margin-top: 12px; font-weight: bold; }
+.ed-field input {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  font: inherit;
+  border: 1px solid var(--ed-line);
+  border-radius: 6px;
+}
+
+.ed-error { color: var(--ed-error); }
+.ed-note { color: #57606a; font-size: 13px; }
+
+.ed-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 16px;
+}
+.ed-dialog-actions .ed-btn-ghost { color: var(--ed-panel-fg); }
+
+.ed-review-list { list-style: none; margin: 0; padding: 0; }
+.ed-review-list li { padding: 10px 0; border-bottom: 1px solid var(--ed-line); }
+.ed-review-list del { display: block; color: #82071e; background: #ffebe9; text-decoration: line-through; padding: 2px 6px; }
+.ed-review-list ins { display: block; color: #0f5323; background: #dafbe1; text-decoration: none; padding: 2px 6px; margin-top: 4px; }
+
+.ed-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 600px) {
+  .ed-bar { padding: 8px 16px; }
+  .ed-spacer { display: none; }
+  .ed-page select { max-width: 160px; }
+}

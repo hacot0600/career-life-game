@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>編集モード｜職業人生ゲーム</title>
+  <link rel="stylesheet" href="edit.css">
+</head>
+<body>
+  <!-- ページの文字を、実際の見た目のままクリックして直すための管理画面。サイトのメニューからはリンクしていない。 -->
+  <header class="ed-bar">
+    <strong class="ed-title">編集モード</strong>
+    <label class="ed-page">
+      <span class="ed-visually-hidden">編集するページ</span>
+      <select id="ed-page"></select>
+    </label>
+    <span id="ed-count" class="ed-count">変更なし</span>
+    <span class="ed-spacer"></span>
+    <button type="button" id="ed-discard" class="ed-btn ed-btn-ghost" disabled>元に戻す</button>
+    <button type="button" id="ed-save" class="ed-btn ed-btn-primary" disabled>保存して公開</button>
+    <button type="button" id="ed-settings" class="ed-btn ed-btn-ghost" aria-label="設定">設定</button>
+  </header>
+  <p id="ed-message" class="ed-message">文字をクリックすると、そのまま直せます。点線の枠が直せる場所です。</p>
+  <iframe id="ed-frame" class="ed-frame" title="編集中のページ"></iframe>
+
+  <dialog id="ed-setup" class="ed-dialog">
+    <form method="dialog" id="ed-setup-form">
+      <h2>はじめに一度だけ設定します</h2>
+      <p>保存するとGitHubのサイトに直接反映されます。そのための「合言葉（トークン）」を一度だけ入れてください。この合言葉は、このブラウザの中だけに保存されます。</p>
+      <ol>
+        <li><a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">GitHubのトークン作成ページ</a>を開く</li>
+        <li>Token name に「HP編集」、Expiration は好きな期限を選ぶ</li>
+        <li>Repository access で「Only select repositories」を選び、<b>career-life-game</b> を選ぶ</li>
+        <li>Permissions の Repository permissions で <b>Contents</b> を「Read and write」にする</li>
+        <li>一番下の「Generate token」を押し、表示された <code>github_pat_</code> から始まる文字をコピーする</li>
+      </ol>
+      <label class="ed-field">トークン
+        <input id="ed-token" type="password" autocomplete="off" placeholder="github_pat_..." required>
+      </label>
+      <p id="ed-setup-error" class="ed-error" hidden></p>
+      <div class="ed-dialog-actions">
+        <button type="button" id="ed-token-clear" class="ed-btn ed-btn-ghost">トークンを削除</button>
+        <button type="submit" class="ed-btn ed-btn-primary">保存する</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="ed-review" class="ed-dialog">
+    <form method="dialog">
+      <h2 id="ed-review-title">保存される変更</h2>
+      <ul id="ed-review-list" class="ed-review-list"></ul>
+      <p id="ed-review-note" class="ed-note"></p>
+      <div class="ed-dialog-actions">
+        <button type="submit" value="cancel" class="ed-btn ed-btn-ghost">やめる</button>
+        <button type="submit" value="confirm" id="ed-review-ok" class="ed-btn ed-btn-primary">この内容で公開する</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="edit.js"></script>
+</body>
+</html>

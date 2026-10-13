@@ -1,0 +1,477 @@
+/* 職業人生ゲーム - ミニゲーム（about.html の「ためしに遊んでみよう」）
+   色は style.css の変数を使い、マスの色は「マスの説明」と同じにしています */
+
+.mg-root .mg-screen[hidden] {
+  display: none;
+}
+
+.mg-panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+}
+
+.mg-panel h3 {
+  margin: 0 0 12px;
+  font-size: 1.1rem;
+}
+
+.mg-muted {
+  color: var(--muted);
+}
+
+/* ボタン（style.css の .btn と同じ見た目） */
+.mg-btn {
+  font: inherit;
+  font-weight: bold;
+  border-radius: 999px;
+  padding: 10px 22px;
+  cursor: pointer;
+  border: 2px solid var(--orange);
+  transition: background 0.2s;
+}
+
+.mg-btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.mg-btn-primary:hover {
+  background: var(--orange-deep);
+}
+
+.mg-btn-ghost {
+  background: var(--white);
+  color: var(--orange-deep);
+}
+
+.mg-btn-ghost:hover {
+  background: var(--yellow);
+}
+
+.mg-root .btn:disabled,
+.mg-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mg-btn-big {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 1.1rem;
+  padding: 14px;
+}
+
+/* はじめる画面 */
+.mg-player-inputs {
+  display: grid;
+  gap: 10px;
+}
+
+.mg-player-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mg-player-input input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--cream);
+  color: var(--text);
+}
+
+.mg-player-input input:focus {
+  outline: 2px solid var(--orange);
+  outline-offset: 1px;
+}
+
+.mg-setup-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mg-token-dot {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 0 0 1px rgba(43, 33, 24, 0.25);
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+/* ターン表示 */
+.mg-turn-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 20px;
+  position: sticky;
+  top: calc(var(--header-h) + 8px);
+  z-index: 5;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(43, 33, 24, 0.08);
+}
+
+.mg-turn-bar strong {
+  font-size: 1.15rem;
+}
+
+.mg-dice-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mg-dice {
+  font-size: 2.4rem;
+  line-height: 1;
+  width: 1.2em;
+  text-align: center;
+}
+
+.mg-dice.mg-rolling {
+  animation: mg-shake 0.12s infinite;
+}
+
+@keyframes mg-shake {
+  0% { transform: rotate(-12deg); }
+  50% { transform: rotate(12deg); }
+  100% { transform: rotate(-12deg); }
+}
+
+/* 盤面 */
+.mg-board {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.mg-square {
+  min-height: 74px;
+  border-radius: 10px;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--white);
+}
+
+.mg-sq-num {
+  align-self: flex-start;
+  font-size: 0.7rem;
+  opacity: 0.85;
+}
+
+.mg-sq-tokens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+  min-height: 18px;
+}
+
+.mg-token {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.mg-token-active {
+  animation: mg-bounce 0.8s infinite;
+}
+
+@keyframes mg-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.mg-sq-start,
+.mg-sq-goal {
+  background: var(--white);
+  color: var(--orange-deep);
+  border: 2px solid var(--orange);
+}
+
+.mg-sq-card    { background: var(--red); }
+.mg-sq-special { background: var(--gold); color: var(--text); }
+.mg-sq-mission { background: var(--green); }
+.mg-sq-quiz    { background: var(--blue); }
+
+/* スコア */
+.mg-scoreboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.mg-score {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.mg-score-active {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px var(--orange);
+}
+
+.mg-score-head,
+.mg-rank-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mg-points {
+  margin-left: auto;
+  color: var(--orange-deep);
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.mg-finished {
+  margin: 4px 0 0;
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: bold;
+}
+
+.mg-held-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.mg-mini-card {
+  background: var(--yellow);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+
+.mg-log-panel {
+  margin-top: 20px;
+}
+
+.mg-log {
+  margin: 0;
+  padding-left: 1.2em;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.mg-log li:first-child {
+  color: var(--text);
+  font-weight: bold;
+}
+
+/* ダイアログ */
+.mg-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 33, 24, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 100;
+}
+
+.mg-modal[hidden] {
+  display: none;
+}
+
+.mg-modal-box {
+  background: var(--cream);
+  border-radius: 20px;
+  padding: 24px;
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 3px solid var(--orange);
+}
+
+.mg-modal-kind {
+  margin: 0;
+  color: var(--orange-deep);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.mg-modal-box h2 {
+  margin: 4px 0 16px;
+  font-size: 1.3rem;
+}
+
+.mg-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.mg-job-cards {
+  display: grid;
+  gap: 12px;
+}
+
+.mg-job-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  border: 2px solid var(--gold);
+}
+
+.mg-job-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mg-job-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.mg-job-logo {
+  max-height: 44px;
+  max-width: 140px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mg-job-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.mg-job-company {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.mg-job-desc {
+  margin: 8px 0;
+}
+
+.mg-job-helps-title {
+  font-weight: bold;
+  color: var(--orange-deep);
+}
+
+.mg-job-helps {
+  margin: 4px 0 0;
+  padding-left: 1.2em;
+}
+
+.mg-result-line {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.mg-result-line.mg-good { color: var(--green); }
+.mg-result-line.mg-bad  { color: var(--red); }
+
+.mg-quiz-choices {
+  display: grid;
+  gap: 8px;
+}
+
+.mg-btn-choice {
+  background: var(--white);
+  color: var(--text);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+}
+
+.mg-btn-choice:hover:not(:disabled) {
+  border-color: var(--orange);
+}
+
+.mg-btn-choice:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.mg-choice-good { background: var(--green); border-color: var(--green); color: var(--white); }
+.mg-choice-bad  { background: var(--red); border-color: var(--red); color: var(--white); }
+
+/* けっか */
+.mg-ranking {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.mg-rank-item {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.mg-medal {
+  font-size: 1.5rem;
+}
+
+.mg-closing {
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .mg-panel {
+    padding: 16px;
+  }
+
+  .mg-board {
+    gap: 4px;
+  }
+
+  .mg-square {
+    min-height: 58px;
+    font-size: 0.62rem;
+    padding: 2px;
+  }
+
+  .mg-token {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mg-dice.mg-rolling,
+  .mg-token-active {
+    animation: none;
+  }
+}

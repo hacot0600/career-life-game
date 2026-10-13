@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>職業人生ゲームとは｜職業人生ゲーム</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="game.css">
 </head>
 <body>
   <header id="site-header" class="site-header"></header>
@@ -59,14 +60,81 @@
           </li>
         </ul>
 
+        <p class="center"><a class="btn btn-outline" href="#play">ミニゲームで遊んでみる</a></p>
+
         <h2>職業カード</h2>
         <p>カードの表には職業名とイラスト、裏には仕事内容・その仕事でできること、そして協賛企業のロゴと紹介が載っています。遊びながら自然に地元企業のことを知ることができます。</p>
         <p class="center"><a class="btn" href="sponsors.html">協賛企業を見る</a></p>
       </div>
     </section>
+
+    <!-- ミニゲーム：game.js / game-data.js / game.css。IDとクラスは mg- 付き -->
+    <section class="section section-alt" id="play">
+      <div class="container prose mg-root" id="mg-root">
+        <h2>ためしに遊んでみよう</h2>
+        <p>イベントで使っている職業カードで、すごろくを体験できるミニ版です。1〜4人で、ひとつの画面を順番に使って遊べます。</p>
+
+        <!-- はじめる画面 -->
+        <div id="mg-setup" class="mg-screen mg-panel">
+          <h3>だれが あそぶ？</h3>
+          <form id="mg-setup-form">
+            <div id="mg-player-inputs" class="mg-player-inputs"></div>
+            <div class="mg-setup-actions">
+              <button type="button" id="mg-remove-player" class="btn btn-outline">− へらす</button>
+              <button type="button" id="mg-add-player" class="btn btn-outline">＋ ふやす</button>
+            </div>
+            <button type="submit" class="btn mg-btn-big">ゲームを はじめる</button>
+          </form>
+        </div>
+
+        <!-- ゲーム画面 -->
+        <div id="mg-game" class="mg-screen" hidden>
+          <div class="mg-turn-bar mg-panel">
+            <div>
+              <span id="mg-turn-token" class="mg-token-dot"></span>
+              <strong id="mg-turn-name"></strong> の ばん
+            </div>
+            <div class="mg-dice-area">
+              <div id="mg-dice" class="mg-dice" aria-live="polite">🎲</div>
+              <button id="mg-roll-btn" class="btn">サイコロを ふる</button>
+            </div>
+          </div>
+
+          <div id="mg-board" class="mg-board" aria-label="ゲームばん"></div>
+
+          <div id="mg-scoreboard" class="mg-scoreboard"></div>
+
+          <div class="mg-panel mg-log-panel">
+            <h3>できごと</h3>
+            <ul id="mg-log" class="mg-log"></ul>
+          </div>
+        </div>
+
+        <!-- けっか画面 -->
+        <div id="mg-result" class="mg-screen mg-panel" hidden>
+          <h3>けっか はっぴょう！</h3>
+          <ol id="mg-ranking" class="mg-ranking"></ol>
+          <p class="mg-closing">きになる おしごとは あったかな？<br>おうちの ひとと「しょうらい どんな しごとを してみたい？」を はなしてみよう！</p>
+          <button id="mg-again-btn" class="btn mg-btn-big">もういちど あそぶ</button>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- ミニゲームのカードやクイズを表示するダイアログ -->
+  <div id="mg-modal" class="mg-modal" hidden>
+    <div class="mg-modal-box" role="dialog" aria-modal="true" aria-labelledby="mg-modal-title">
+      <p id="mg-modal-kind" class="mg-modal-kind"></p>
+      <h2 id="mg-modal-title"></h2>
+      <div id="mg-modal-body"></div>
+      <div id="mg-modal-actions" class="mg-modal-actions"></div>
+    </div>
+  </div>
+
 
   <footer id="site-footer" class="site-footer"></footer>
   <script src="script.js"></script>
+  <script src="game-data.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>

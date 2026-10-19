@@ -126,19 +126,8 @@ function setupRegionTabs() {
   show([...tabs].some((t) => t.dataset.regionTab === fromHash) ? fromHash : tabs[0].dataset.regionTab);
 }
 
-// 問い合わせフォーム（送信先が決まるまでは送信しない）
-function setupContactForm() {
-  const form = document.getElementById("contact-form");
-  if (!form) return;
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert("フォームの送信先は準備中です。お手数ですがInstagramのDMからご連絡ください。");
-  });
-}
-
 renderHeader();
 renderFooter();
 setupBackToTop();
 setupSlideshow();
 setupRegionTabs();
-setupContactForm();

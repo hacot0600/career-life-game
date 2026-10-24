@@ -15,6 +15,10 @@
   let state = null;
   let playerCount = 2;
 
+  // トップページのデモ（#mg-root に data-mode="demo"）は、ひとりで短い盤面を遊ぶ
+  const DEMO = $("root").dataset.mode === "demo";
+  const squares = DEMO ? DEMO_BOARD : BOARD;
+
   // ---------- ユーティリティ ----------
   function shuffle(list) {
     const a = list.slice();
@@ -90,7 +94,7 @@
       jobDeck: shuffle(JOBS.map((job) => job.id)),
       busy: false,
     };
-    $("log").replaceChildren();
+    $("log")?.replaceChildren();
     renderBoard();
     renderScoreboard();
     renderTurn();
@@ -109,7 +113,7 @@
   function renderBoard() {
     const board = $("board");
     board.replaceChildren();
-    BOARD.forEach((type, index) => {
+    squares.forEach((type, index) => {
       const info = SQUARE_TYPES[type];
       const { row, col } = squarePosition(index);
       const square = el(
@@ -120,7 +124,7 @@
           title: info.help ? `${info.label}：${info.help}` : info.label,
         },
         [
-          el("span", { class: "sq-num", text: index === 0 || index === BOARD.length - 1 ? "" : String(index) }),
+          el("span", { class: "sq-num", text: index === 0 || index === squares.length - 1 ? "" : String(index) }),
           el("span", { class: "sq-label", text: info.short }),
           el("div", { class: "sq-tokens", "data-index": String(index) }),
         ]
@@ -178,6 +182,7 @@
 
   function addLog(text) {
     const log = $("log");
+    if (!log) return;
     log.prepend(el("li", { text }));
     while (log.children.length > 30) log.lastChild.remove();
   }
@@ -362,7 +367,7 @@
     const value = await rollDice();
     addLog(`${player.name} は ${value} が でた！`);
 
-    const goalIndex = BOARD.length - 1;
+    const goalIndex = squares.length - 1;
     const target = Math.min(player.pos + value, goalIndex);
     while (player.pos < target) {
       player.pos += 1;
@@ -370,7 +375,7 @@
       await wait(STEP_MS);
     }
 
-    const type = BOARD[player.pos];
+    const type = squares[player.pos];
     if (type === "card") await doCardSquare(player, 1);
     else if (type === "special") await doCardSquare(player, 2);
     else if (type === "mission") await doMissionSquare(player);
@@ -402,7 +407,7 @@
     const list = $("ranking");
     list.replaceChildren();
     ranked.forEach((player, i) => {
-      const medal = ["🥇", "🥈", "🥉"][i] || "🎖️";
+      const medal = ranked.length === 1 ? "🎉" : ["🥇", "🥈", "🥉"][i] || "🎖️";
       const jobs = player.cards.map((id) => {
         const job = jobById(id);
         return el("span", { class: "mini-card", text: `${job.icon} ${job.name}` });
@@ -419,20 +424,46 @@
         ])
       );
     });
+    if (DEMO) renderCompanies(state.players[0]);
     showScreen("result");
   }
 
+  // デモの結果：集めたカードに載っている協賛企業を見せて、協賛企業ページへつなぐ
+  function renderCompanies(player) {
+    const box = $("companies");
+    if (!box) return;
+    const jobs = [...new Set(player.cards)].map(jobById);
+    box.replaceChildren(
+      ...jobs.map((job) =>
+        el("li", { class: "company" }, [
+          el("img", { class: "company-logo", src: job.logo, alt: "" }),
+          el("div", {}, [
+            el("strong", { text: job.company }),
+            el("span", { class: "muted", text: `${job.icon} ${job.name}` }),
+          ]),
+        ])
+      )
+    );
+    $("companies-panel").hidden = jobs.length === 0;
+  }
+
   // ---------- イベント ----------
-  $("add-player").addEventListener("click", () => {
-    playerCount = Math.min(MAX_PLAYERS, playerCount + 1);
-    renderPlayerInputs();
-  });
-  $("remove-player").addEventListener("click", () => {
-    playerCount = Math.max(MIN_PLAYERS, playerCount - 1);
-    renderPlayerInputs();
-  });
+  if (!DEMO) {
+    $("add-player").addEventListener("click", () => {
+      playerCount = Math.min(MAX_PLAYERS, playerCount + 1);
+      renderPlayerInputs();
+    });
+    $("remove-player").addEventListener("click", () => {
+      playerCount = Math.max(MIN_PLAYERS, playerCount - 1);
+      renderPlayerInputs();
+    });
+  }
   $("setup-form").addEventListener("submit", (event) => {
     event.preventDefault();
+    if (DEMO) {
+      startGame(["あなた"]);
+      return;
+    }
     const names = [...$("player-inputs").querySelectorAll("input")].map(
       (input, i) => input.value.trim() || DEFAULT_NAMES[i]
     );
@@ -441,5 +472,5 @@
   $("roll-btn").addEventListener("click", takeTurn);
   $("again-btn").addEventListener("click", () => showScreen("setup"));
 
-  renderPlayerInputs();
+  if (!DEMO) renderPlayerInputs();
 })();

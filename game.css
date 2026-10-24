@@ -444,6 +444,48 @@
   font-size: 1.5rem;
 }
 
+/* デモの結果：あつめたカードの会社 */
+.mg-companies-panel {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.mg-companies-panel[hidden] {
+  display: none;
+}
+
+.mg-companies {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 16px;
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.mg-company {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+
+.mg-company-logo {
+  width: 56px;
+  height: 40px;
+  object-fit: contain;
+  background: var(--white);
+  border-radius: 8px;
+}
+
+.mg-company strong,
+.mg-company span {
+  display: block;
+}
+
 .mg-closing {
   text-align: center;
 }

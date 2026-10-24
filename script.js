@@ -64,7 +64,7 @@ function renderFooter() {
     <div class="footer-inner">
       <div class="footer-about">
         <p class="footer-logo">🎲 職業人生ゲーム</p>
-        <p>ゲームで地元企業を知る、子ども向けの職業体験イベントです。</p>
+        <p>あそんで みつける しょうらいの おしごと。子ども向けの職業体験すごろくです。</p>
         <div class="sns">
           <a href="${INSTAGRAM.game}" class="sns-link" target="_blank" rel="noopener">
             <span class="sns-icon" aria-hidden="true">IG</span>職業人生ゲームのInstagram

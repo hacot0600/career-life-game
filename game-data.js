@@ -106,3 +106,11 @@ const BOARD = [
   "quiz", "mission", "mission",
   "goal",
 ];
+
+// トップページのデモ用の短い盤面（1〜2分で終わるように12マス）
+const DEMO_BOARD = [
+  "start",
+  "card", "quiz", "card", "mission", "special",
+  "quiz", "mission", "card", "quiz", "mission",
+  "goal",
+];

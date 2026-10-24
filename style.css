@@ -1320,3 +1320,9 @@ h3 {
     height: 52px;
   }
 }
+
+/* トップの「なぜやるのか」：本文の幅に合わせて2列まで */
+.intro .purpose-list {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  margin-block: 8px 24px;
+}

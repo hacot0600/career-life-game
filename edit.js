@@ -9,7 +9,6 @@ const TOKEN_KEY = "cle-edit-token";
 
 const PAGES = [
   { path: "index.html", label: "トップ" },
-  { path: "about.html", label: "職業人生ゲームとは" },
   { path: "sponsors.html", label: "各地の協賛企業" },
   { path: "organizer.html", label: "主催団体" },
   { path: "support.html", label: "賛助企業" },

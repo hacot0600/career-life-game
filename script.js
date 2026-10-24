@@ -2,7 +2,7 @@
 // ヘッダー・フッターは全ページ共通なので、ここで一か所だけ管理する。
 
 const NAV_ITEMS = [
-  { href: "about.html", label: "職業人生ゲームとは" },
+  { href: "index.html#intro", label: "職業人生ゲームについて" },
   { href: "sponsors.html", label: "おしごと一覧" },
   { href: "organizer.html", label: "主催について" },
   { href: "support.html", label: "賛助企業" },

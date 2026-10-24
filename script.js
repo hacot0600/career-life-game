@@ -126,8 +126,61 @@ function setupRegionTabs() {
   show([...tabs].some((t) => t.dataset.regionTab === fromHash) ? fromHash : tabs[0].dataset.regionTab);
 }
 
+// トップの「今後のスケジュール」：月ごとに表示して、予定のある月だけを矢印で行き来する
+function setupSchedule() {
+  const items = [...document.querySelectorAll(".schedule-item[data-date]")];
+  if (!items.length) return;
+  const DOW = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (const item of items) {
+    const [y, m, d] = item.dataset.date.split("-").map(Number);
+    item.dataset.month = `${y}-${String(m).padStart(2, "0")}`;
+    const md = item.querySelector(".schedule-md");
+    const dow = item.querySelector(".schedule-dow");
+    if (d) {
+      const date = new Date(y, m - 1, d);
+      md.textContent = `${String(m).padStart(2, "0")}/${String(d).padStart(2, "0")}`;
+      dow.textContent = DOW[date.getDay()];
+      if (date.getDay() === 6) item.classList.add("is-sat");
+      if (date.getDay() === 0) item.classList.add("is-sun");
+      if (date < today) item.classList.add("is-done");
+    } else {
+      // 日にちが決まっていない予定は「05月」「日程調整中」と出す
+      md.textContent = `${String(m).padStart(2, "0")}月`;
+      dow.textContent = "日程調整中";
+      if (new Date(y, m, 0) < today) item.classList.add("is-done");
+    }
+  }
+
+  const months = [...new Set(items.map((item) => item.dataset.month))].sort();
+  const thisMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
+  let index = months.findIndex((month) => month >= thisMonth);
+  if (index === -1) index = months.length - 1;
+
+  const nav = document.querySelector(".schedule-nav");
+  const label = nav.querySelector(".schedule-month");
+  const [prev, next] = nav.querySelectorAll(".schedule-arrow");
+
+  function show() {
+    const month = months[index];
+    const [y, m] = month.split("-");
+    label.textContent = `${m}.${y}`;
+    items.forEach((item) => (item.hidden = item.dataset.month !== month));
+    prev.disabled = index === 0;
+    next.disabled = index === months.length - 1;
+  }
+
+  prev.addEventListener("click", () => { index = Math.max(0, index - 1); show(); });
+  next.addEventListener("click", () => { index = Math.min(months.length - 1, index + 1); show(); });
+  nav.hidden = false;
+  show();
+}
+
 renderHeader();
 renderFooter();
+setupSchedule();
 setupBackToTop();
 setupSlideshow();
 setupRegionTabs();

@@ -1175,55 +1175,141 @@ h3 {
   text-align: center;
 }
 
-/* ---------- トップ：出店スケジュール ---------- */
+/* ---------- トップ：デモ ----------
+   背景に実際のゲームの盤面を敷き、上に薄い色を重ねて文字を読みやすくする */
+.demo {
+  background: linear-gradient(rgba(255, 248, 236, 0.86), rgba(255, 248, 236, 0.86)), url(images/game/board.jpg) center / cover;
+}
+
+/* ---------- トップ：今後のスケジュール ----------
+   日付・写真・イベント名を1行にした一覧。月ごとに表示し、矢印で月を移動する */
+.schedule-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 0 0 24px;
+}
+
+.schedule-month {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+  min-width: 6.5em;
+  text-align: center;
+}
+
+.schedule-arrow {
+  font: inherit;
+  font-size: 1.4rem;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--orange-deep);
+  cursor: pointer;
+}
+
+.schedule-arrow:hover:not(:disabled) {
+  background: var(--yellow);
+}
+
+.schedule-arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
 .schedule {
   list-style: none;
   margin: 0 auto;
   padding: 0;
   max-width: 760px;
   display: grid;
-  gap: 16px;
+  gap: 12px;
 }
 
 .schedule-item {
-  position: relative;
+  display: grid;
+  grid-template-columns: 5.5em 64px 1fr;
+  align-items: center;
+  gap: 20px;
   background: var(--white);
-  border: 1px solid var(--line);
-  border-left: 6px solid var(--orange);
   border-radius: var(--radius);
-  padding: 20px 24px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 3px rgba(43, 33, 24, 0.08);
 }
 
-.schedule-date {
-  margin: 0;
+.schedule-item[hidden] {
+  display: none;
+}
+
+.schedule-when {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.schedule-md {
+  font-size: 1.7rem;
   font-weight: bold;
-  color: var(--orange-deep);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule-dow {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--muted);
+}
+
+.schedule-item.is-sat .schedule-md { color: var(--blue); }
+.schedule-item.is-sun .schedule-md { color: var(--red); }
+
+.schedule-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.schedule-body {
+  min-width: 0;
 }
 
 .schedule-name {
-  margin: 4px 0;
-  font-size: 1.2rem;
+  margin: 0;
+  font-size: 1.05rem;
 }
 
 .schedule-place {
-  margin: 0;
+  margin: 4px 0 0;
+  font-size: 0.85rem;
   color: var(--muted);
 }
 
 .schedule-item.is-done {
-  border-left-color: var(--line);
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
-.schedule-item.is-done::after {
-  content: "終了";
-  position: absolute;
-  top: 16px;
-  right: 20px;
-  font-size: 0.8rem;
-  font-weight: bold;
-  color: var(--muted);
-  background: var(--cream);
-  border-radius: 999px;
-  padding: 2px 12px;
+.schedule-item.is-done .schedule-dow::after {
+  content: "　終了";
+}
+
+@media (max-width: 560px) {
+  .schedule-item {
+    grid-template-columns: 4.6em 52px 1fr;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
+  .schedule-md {
+    font-size: 1.35rem;
+  }
+
+  .schedule-thumb {
+    width: 52px;
+    height: 52px;
+  }
 }

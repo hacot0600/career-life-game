@@ -23,6 +23,26 @@
       </div>
     </section>
 
+    <section class="section intro" id="intro">
+      <div class="container intro-inner">
+        <div class="intro-text">
+          <h2 class="intro-title">職業人生ゲームについて</h2>
+          <p class="intro-lead">サイコロをふって職業カードを集める<br class="pc-only">子ども向けの職業体験すごろくです。</p>
+          <p>将来の夢やなりたい職業がまだはっきりしない子どもたちが、遊びながらたくさんの仕事に出会えるようにつくりました。職業カードの裏には、その仕事をしている地元の企業が載っています。</p>
+          <p>遊び終わったら、親子で「どのカードが気になった？」と話してみてください。</p>
+          <dl class="intro-facts">
+            <div><dt>対象</dt><dd>小学生と保護者</dd></div>
+            <div><dt>プレイ時間</dt><dd>15〜30分</dd></div>
+            <div><dt>職業カード</dt><dd>運送業や</dd></div>
+          </dl>
+          <p class="intro-links">
+            <a class="btn" href="about.html">くわしく見る</a>
+            <a class="btn btn-outline" href="sponsors.html">おしごと一覧</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- デモ：game.js / game-data.js / game.css。data-mode="demo" でひとり用の短い盤面になる -->
     <section class="section section-alt demo" id="demo">
       <div class="container mg-root" id="mg-root" data-mode="demo">
@@ -66,41 +86,32 @@
       </div>
     </section>
 
-    <section class="section intro" id="intro">
-      <div class="container intro-inner">
-        <div class="intro-text">
-          <h2 class="intro-title">職業人生ゲームについて</h2>
-          <p class="intro-lead">サイコロをふって職業カードを集める<br class="pc-only">子ども向けの職業体験すごろくです。</p>
-          <p>将来の夢やなりたい職業がまだはっきりしない子どもたちが、遊びながらたくさんの仕事に出会えるようにつくりました。職業カードの裏には、その仕事をしている地元の企業が載っています。</p>
-          <p>遊び終わったら、親子で「どのカードが気になった？」と話してみてください。</p>
-          <dl class="intro-facts">
-            <div><dt>対象</dt><dd>小学生と保護者</dd></div>
-            <div><dt>プレイ時間</dt><dd>15〜30分</dd></div>
-            <div><dt>職業カード</dt><dd>多数</dd></div>
-          </dl>
-          <p class="intro-links">
-            <a class="btn" href="about.html">くわしく見る</a>
-            <a class="btn btn-outline" href="sponsors.html">協賛企業を見る</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 出店スケジュール：予定が決まったら .schedule-item を足す。終わったものは is-done を付けて残す -->
-    <section class="section section-alt" id="schedule">
+    <!-- 今後のスケジュール：予定は .schedule-item を足す。data-date は日にちが決まっていなければ "2027-05" のように月まで。
+         月ごとに表示し、矢印で予定のある月だけを行き来する。過ぎた予定は「終了」になる -->
+    <section class="section" id="schedule">
       <div class="container">
-        <h2 class="section-title">出店スケジュール</h2>
-        <p class="section-lead">対象：小学生と保護者 ／ 1回15〜30分 ／ 遊んだあとにお菓子がもらえます</p>
+        <h2 class="section-title">今後のスケジュール</h2>
+        <div class="schedule-nav" hidden>
+          <button type="button" class="schedule-arrow" data-step="-1" aria-label="前の月">←</button>
+          <span class="schedule-month" aria-live="polite"></span>
+          <button type="button" class="schedule-arrow" data-step="1" aria-label="次の月">→</button>
+        </div>
         <ul class="schedule">
-          <li class="schedule-item">
-            <p class="schedule-date">2027年5月（日程調整中）<span class="placeholder-note">仮</span></p>
-            <h3 class="schedule-name">吹田産業フェア</h3>
-            <p class="schedule-place">会場：調整中</p>
+          <li class="schedule-item" data-date="2026-09-27">
+            <div class="schedule-when"><span class="schedule-md"></span><span class="schedule-dow"></span></div>
+            <img class="schedule-thumb" src="images/game/board.jpg" alt="" width="64" height="64">
+            <div class="schedule-body">
+              <h3 class="schedule-name">めぐりえフェス</h3>
+              <p class="schedule-place">会場：安満遺跡公園</p>
+            </div>
           </li>
-          <li class="schedule-item is-done">
-            <p class="schedule-date">開催日をここに入れます<span class="placeholder-note">仮</span></p>
-            <h3 class="schedule-name">高槻での開催</h3>
-            <p class="schedule-place">会場：調整中</p>
+          <li class="schedule-item" data-date="2027-05">
+            <div class="schedule-when"><span class="schedule-md"></span><span class="schedule-dow"></span></div>
+            <img class="schedule-thumb" src="images/game/board.jpg" alt="" width="64" height="64">
+            <div class="schedule-body">
+              <h3 class="schedule-name">吹田産業フェア</h3>
+              <p class="schedule-place">会場：調整中<span class="placeholder-note">仮</span></p>
+            </div>
           </li>
         </ul>
       </div>

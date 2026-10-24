@@ -1175,6 +1175,13 @@ h3 {
   text-align: center;
 }
 
+/* デモの中の白い枠はなくし、盤面の背景の上に直接文字を置く */
+.demo .mg-panel {
+  background: transparent;
+  border: none;
+  padding-inline: 0;
+}
+
 /* ---------- トップ：デモ ----------
    背景に実際のゲームの盤面を敷き、上に薄い色を重ねて文字を読みやすくする */
 .demo {

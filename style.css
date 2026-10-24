@@ -1232,7 +1232,7 @@ h3 {
 
 .schedule-item {
   display: grid;
-  grid-template-columns: 5.5em 64px 1fr;
+  grid-template-columns: minmax(5.5em, max-content) 1fr;
   align-items: center;
   gap: 20px;
   background: var(--white);
@@ -1299,7 +1299,7 @@ h3 {
 
 @media (max-width: 560px) {
   .schedule-item {
-    grid-template-columns: 4.6em 52px 1fr;
+    grid-template-columns: minmax(4.6em, max-content) 1fr;
     gap: 12px;
     padding: 12px 14px;
   }

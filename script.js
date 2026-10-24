@@ -3,8 +3,8 @@
 
 const NAV_ITEMS = [
   { href: "about.html", label: "職業人生ゲームとは" },
-  { href: "sponsors.html", label: "各地の協賛企業" },
-  { href: "organizer.html", label: "主催団体" },
+  { href: "sponsors.html", label: "おしごと一覧" },
+  { href: "organizer.html", label: "主催について" },
   { href: "support.html", label: "賛助企業" },
   { href: "faq.html", label: "よくある質問" },
 ];
@@ -56,7 +56,7 @@ function renderHeader() {
 function renderFooter() {
   const el = document.getElementById("site-footer");
   if (!el) return;
-  const links = [{ href: "index.html", label: "トップ" }, ...NAV_ITEMS, { href: "contact.html", label: "お問い合わせ・協賛" }]
+  const links = [{ href: "index.html", label: "トップ" }, ...NAV_ITEMS, { href: "contact.html", label: "お問い合わせ" }]
     .map((item) => `<li><a href="${item.href}">${item.label}</a></li>`)
     .join("");
 
@@ -73,7 +73,7 @@ function renderFooter() {
             <span class="sns-icon" aria-hidden="true">IG</span>AporTarのInstagram
           </a>
         </div>
-        <a class="btn" href="contact.html">お問い合わせ・協賛のご案内</a>
+        <a class="btn" href="contact.html">お問い合わせ</a>
       </div>
       <nav class="footer-nav" aria-label="サイトマップ">
         <ul>${links}</ul>
@@ -143,9 +143,17 @@ function setupSchedule() {
       const date = new Date(y, m - 1, d);
       md.textContent = `${String(m).padStart(2, "0")}/${String(d).padStart(2, "0")}`;
       dow.textContent = DOW[date.getDay()];
+      let last = date;
+      // 2日以上の開催は data-end に最終日を入れる（例：10/17-18、Sat・Sun）
+      if (item.dataset.end) {
+        const [ey, em, ed] = item.dataset.end.split("-").map(Number);
+        last = new Date(ey, em - 1, ed);
+        md.textContent += em === m ? `-${String(ed).padStart(2, "0")}` : `-${String(em).padStart(2, "0")}/${String(ed).padStart(2, "0")}`;
+        dow.textContent += "・" + DOW[last.getDay()];
+      }
       if (date.getDay() === 6) item.classList.add("is-sat");
       if (date.getDay() === 0) item.classList.add("is-sun");
-      if (date < today) item.classList.add("is-done");
+      if (last < today) item.classList.add("is-done");
     } else {
       // 日にちが決まっていない予定は「05月」「日程調整中」と出す
       md.textContent = `${String(m).padStart(2, "0")}月`;
@@ -155,8 +163,10 @@ function setupSchedule() {
   }
 
   const months = [...new Set(items.map((item) => item.dataset.month))].sort();
-  const thisMonth = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}`;
-  let index = months.findIndex((month) => month >= thisMonth);
+  // 最初は、まだ終わっていない予定がある一番近い月を出す
+  let index = months.findIndex((month) =>
+    items.some((item) => item.dataset.month === month && !item.classList.contains("is-done"))
+  );
   if (index === -1) index = months.length - 1;
 
   const nav = document.querySelector(".schedule-nav");
